@@ -1,0 +1,45 @@
+body {
+
+  	font-family: 'Finger Paint', cursive  !important;
+/*  	color:#ffd9d9;
+  	color:#000000; */
+  	text-shadow: 1px 1px 1px #aaa;
+  	margin: 10px;
+ /*	font-size: 170%;*/
+ 	background-color: white;
+}
+
+.phone {
+  font-size: 150%;
+  text-shadow: 2px 2px 2px #aaa;
+  color: red;
+  
+}
+
+.bigclose{
+	font-size: 200%;
+	
+}
+.mbigphone {
+  font-size: 210%;
+  text-shadow: 2px 2px 2px #aaa;
+  color: red;
+  
+}
+
+.boxImage {
+	-moz-box-shadow: 10px 10px 5px #4d4d4d;
+	-webkit-box-shadow: 10px 10px 5px #4d4d4d;
+	box-shadow: 10px 10px 5px #4d4d4d;
+	 margin-bottom: 15px;
+}
+
+.boxImageSmall {
+	-moz-box-shadow: 7px 7px 3px #4d4d4d;
+	-webkit-box-shadow: 7px 10px 3px #4d4d4d;
+	box-shadow: 7px 7px 3px #4d4d4d;
+	margin-right: 10px;
+	float: left;
+	
+	/*width: 50%;*/
+}

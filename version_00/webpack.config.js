@@ -3,7 +3,7 @@ var webpack = require('webpack');
 module.exports = {
 		entry: {
 		    app: [ './src/app.js'],
-			vendor: ["react","react-router"],
+			vendor: ["react","react-router","jquery","react-bootstrap"],
 		  },
    output: {
      path: __dirname + '/dist',
