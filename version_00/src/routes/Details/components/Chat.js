@@ -1,132 +1,209 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Timer from 'react-timer'
-//import $ from 'jquery'
+import $ from 'jquery'
+//import Timer from 'react-timer'
+import Uuid from 'node-uuid'
 //import { Link } from 'react-router'
-import {Button,Thumbnail,Grid,Image,Alert,Label  } from 'react-bootstrap'
-//import { browserHistory } from 'react-router'
-//import ReactDOM from 'react-dom'
+import {Button,Thumbnail,Row,Col,Grid,Image,Alert,Label,Badge,Input } from 'react-bootstrap'
 
 
-//const FADE_DURATION = 200;
+var t;
+var data;
+var chatID
+//var phone
 
 class Chat extends React.Component {
 	
 	constructor(props){
 	    super(props);
 	    this.state = {
-	    		alertVisible: true,
-	    		in: true
+	    	count: 0,
+	    	ask:'',
+	    	nextask: '',
+	    	answer:''	
 	    	   	
 	    }
-//	    this.handleStartChat=this.handleStartChat.bind(this)
-	    this.handleAlertDismiss = this.handleAlertDismiss.bind(this)
-	    this.handleAlertShow = this.handleAlertShow.bind(this)
-	    this.toggle=this.toggle.bind(this)
-//	    this.handleToggleDetailsChat=this.handleToggleDetailsChat.bind(this)
-	  }
-	
-	  handleAlertDismiss() {
-		    this.setState({alertVisible: false});
-		  }
 
-		  handleAlertShow() {
-		    this.setState({alertVisible: true});
-		  }
+	    this.toggle=this.toggle.bind(this)
+	    this.timerOn=this.timerOn.bind(this)
+	    this.timerOff=this.timerOff.bind(this)
+	    this.handleSubmit = this.handleSubmit.bind(this)
+	    this.handleNextAskChange = this.handleNextAskChange.bind(this)
+
+	  }
+	loadajax(url) {
+		$.ajax({
+		      url: 'http://www.paljaat.fi:8000/chat/'+url,
+		      dataType: 'json',
+		      cache: false,
+		      success: function(data) {
+		        this.setState({answer: data.answer});
+		      }.bind(this),
+		      error: function(xhr, status, err) {
+		        console.error(this.props.url, status, err.toString());
+		      }.bind(this)
+		    });		
+	}
+
+	 timerOff(){
+		 clearInterval(t);
+		 t = 0;
+		 this.setState({count:0})
+		 
+	 }	  
+	 timerOn(){
+		 
+		 var self = this;
+		 t =setInterval(function() {
+		 			 
+			console.log("timer",t)
+			console.log(self.state.answer)	
+			self.setState({count: self.state.count + 1});
+			
+		}, 3500); 
+		 		 
+	 }	  
 	  toggle(){
-		  setInterval(
-		  	  console.log("toggle")	
-//			  var elem = ReactDOM.findDOMNode(this.refs.label_typing);
-//			  if (elem.style.visibility ==='hidden'){
-//				  
-//				  elem.style.visibility =''
-//			  } else {
-//				  elem.style.visibility ='hidden'
-//				  
-//			  }
-			  ,3000)
+
+			  var elem = ReactDOM.findDOMNode(this.refs.label_typing);
+			  if (elem.style.visibility ==='hidden'){
+				  
+				  elem.style.visibility =''
+			  } else {
+				  elem.style.visibility ='hidden'
+				  
+			  }
 			  
 		}
-	
-	  
-		componentWillReceiveProps(){
-			console.log("Chat componentWillReceiveProps")
+		  
+		componentWillReceiveProps(nextProps){
+			console.log("Chat componentWillReceiveProps",nextProps)
+						
+			data = nextProps.data
+			this.setState({ask:'Hei '+data.Name+'!'})
+			
+			if (nextProps.timerHandler ==='on'){
+				ReactDOM.findDOMNode(this.refs.answer).style.display ='none'
+				chatID =Uuid.v4()
+				let url =chatID+'/'+data.Phone+'/'+encodeURIComponent(this.state.ask)
+				console.log(url)
+				this.loadajax(encodeURIComponent(url))				
+				this.timerOn()
+				
+			} else {
+				console.log("STOP timeR")
+				this.timerOff()
+
+			}
 
 		}
 		
 		componentWillUpdate(prevProps) {
-			console.log("Chat componentWillUpdate")	
+//			console.log("Chat componentWillUpdate")
+			
+			 if (this.state.count > 7 ){
+				 
+				 this.timerOff()
+				 ReactDOM.findDOMNode(this.refs.label_typing).style.visibility ='';				
+				 ReactDOM.findDOMNode(this.refs.answer).style.display =''	 
+				 
+			 } else {
+				 this.toggle() 
+			 }
+			
 		}
-		
-		
-		componentDidUpdate(prevProps) {
+				
+		componentDidUpdate(prevProps, prevState) {
 			
-			console.log("Chat componentDidUpdate")
-//			setInterval(this.toggle(), 1000);
-			
-						
+//			console.log("Chat componentDidUpdate",prevState)
+//			this.toggle()
+									
 	 } 
-		  
+	
+	componentWillMount(){
+		console.log("willmount Chat")
+		this.setState({nextask: ''});
+		this.setState({ask: ''});
+//		ReactDOM.findDOMNode(this.refs.answer).style.display =''
+			
+	
+	}	
+		
 	componentDidMount(){
 		console.log("didmount Chat")
-
-		
-//		this.toggle()
-		
-		   var self = this;
-			setInterval(function() {
-			
-			var elem = ReactDOM.findDOMNode(self.refs.label_typing);
-			
-			  if (elem.style.visibility ==='hidden'){
-			  
-			  elem.style.visibility =''
-		  } else {
-			  elem.style.visibility ='hidden'
-			  
-		  }			
-			
-    	}, 3000);
-//		
-//		this.toggle();	
-			
-			
-//	    // Set the opacity of the element to 0
-//	    elem.style.opacity = 0;
-//	    window.requestAnimationFrame(function() {
-//	        // Now set a transition on the opacity
-//	        elem.style.transition = "opacity 250ms";
-//	        // and set the opacity to 1
-//	        elem.style.opacity = 1;
-//	    });
-			
-//		this.handleAlertDismiss()
-		
+		data = this.props.data
+		this.setState({ask:'Hei '+data.Name+'!'})
+		var elem = ReactDOM.findDOMNode(this.refs.answer);
+		elem.style.display ='none'
+				
 	}
-		  
+	
+	 handleSubmit(e) {
+		 if (this.state.nextask.length > 0) {
+		 e.preventDefault();
+		 console.log(this.state.nextask)
+		 this.state.ask = this.state.nextask.trim()
+		 this.state.nextask =''
+		 ReactDOM.findDOMNode(this.refs.answer).style.display ='none'
+		 this.timerOn()
+		 let url =chatID+'/'+data.Phone+'/'+encodeURIComponent(this.state.ask)
+		 console.log(url)
+		 this.loadajax(encodeURIComponent(url))
+		 }
+	 }
+	
+	 handleNextAskChange(e) {
+		    this.setState({nextask: e.target.value});
+	 }
+	 
+	 
 	 render() {
-		 var data = this.props.data	
+		 let data = this.props.data
+
+		 var status = 'odotta'
+		 var answer = this.state.answer
+		 var ask = this.state.ask
+		 	 			 
+		 if (this.state.count > 2) {
+			 
+			 status = 'delivered'
+		 }
 		 
-		 let OPTIONS = { prefix: 'seconds elapsed!', delay: 100}
+		 if (this.state.count > 5 ){
+			 
+			 status = 'seen'
+			 
+		 }
+		 
+		 if (this.state.count > 7 ){
+			 
+			 status = 'typing'			 
+		 }
+		 	 		 
 		 return (
 		
 			<div>
-			<p><a className="mbigphone" href="tel:{data.Phone}"><span className="glyphicon glyphicon-earphone" aria-hidden="true"></span> {data.Phone}</a></p>
-			Chat {data.Name} {data.Age}v
+				<p><a className="mbigphone" href={`tel:${data.Phone}`}><span className="glyphicon glyphicon-earphone" aria-hidden="true"></span>{data.Phone}</a></p>
 				
-			<Alert ref='label_typing'>  {data.Name} typing!</Alert>
+				Chatti: {data.Name} {data.Age}v 
+				<Badge ref='label_typing' pullRight>{status}</Badge>
 			
-			<p>Hei {data.Name}!</p>
-			
-			
-			
+				<p></p>						
+			    			   
+				<Alert>{ask}</Alert> 
+				<div ref='answer'> 
+					<Alert bsStyle="danger">{answer}</Alert>
+					<form onSubmit={this.handleSubmit}>
+					<Input type="text" label="Name" placeholder="Kysyä jotain!" value={this.state.nextask}  onChange={this.handleNextAskChange}/>
+				</form>
+				<Button bsStyle="primary" onClick={this.handleSubmit}>Jatkaa</Button>	
+				</div>
 			</div>
 		 
 		 
 		 )
 	 }
-	 
-	 
+	 	 
 }
 
 module.exports = Chat

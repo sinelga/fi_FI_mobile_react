@@ -35,12 +35,6 @@ class App extends React.Component {
   render() {
 	  
 	  
-//	  const { main, chat } = this.props
-//	  
-//	  console.log(main)
-	  
-//	  const { main, sidebar } = this.props
-	  
 	  
     return (
       <div>

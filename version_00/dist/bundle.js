@@ -110,12 +110,6 @@ webpackJsonp([0],{
 			key: 'render',
 			value: function render() {
 
-				//	  const { main, chat } = this.props
-				//	 
-				//	  console.log(main)
-
-				//	  const { main, sidebar } = this.props
-
 				return _react2.default.createElement(
 					'div',
 					null,

@@ -11,7 +11,8 @@ class Details extends React.Component {
 	constructor(props){
 	    super(props);
 	    this.state = {
-	    	data: []
+	    	data: [],
+	    	timerHandler: ''
 //	    	currentComponent: React.Component
 	    	   	
 	    }
@@ -35,16 +36,19 @@ class Details extends React.Component {
 	}
 	
 	handleToggleDetailsChat(){
+
 		var dnode = ReactDOM.findDOMNode(this.refs.chat).style.display
 		
 //		this.setState({currentComponent: "Chat"});
 		
 		if (dnode === 'none') {
-							
+			
+			this.setState({timerHandler: 'on'})
 			ReactDOM.findDOMNode(this.refs.chat).style.display =''
 			ReactDOM.findDOMNode(this.refs.details).style.display ='none'	
 			
 		} else {
+			this.setState({timerHandler: 'off'})
 			ReactDOM.findDOMNode(this.refs.chat).style.display ='none'
 			ReactDOM.findDOMNode(this.refs.details).style.display =''			
 			
@@ -69,12 +73,7 @@ class Details extends React.Component {
 	componentDidMount(){		
 //		console.log("mount Details")
 		ReactDOM.findDOMNode(this.refs.chat).style.display ='none'
-//		    require.ensure([], () => {
-//		        var Chat = require('./Chat.js');
-//		        this.setState({
-//		          currentComponent: Chat
-//		        });
-//		      });
+
 				   
 	}
 	
@@ -108,7 +107,7 @@ class Details extends React.Component {
       			<span aria-hidden="true" className="bigclose">&times;</span>
       		</button>
       
-      		<a className="mbigphone" href="tel:{data.Phone}"><span className="glyphicon glyphicon-earphone" aria-hidden="true"></span> {data.Phone}</a>
+      		<a className="mbigphone" href={`tel:${data.Phone}`}><span className="glyphicon glyphicon-earphone" aria-hidden="true"></span> {data.Phone}</a>
       		<Grid><Image src={imglink} thumbnail></Image><p>{data.Name} {this.state.data.Age}v {data.City}</p><Button onClick={this.handleToggleDetailsChat} bsStyle="primary" bsSize="large" active>Chatti</Button></Grid>
       	</div>
       	
@@ -117,7 +116,7 @@ class Details extends React.Component {
   				<span aria-hidden="true" className="bigclose">&times;</span>
   			</button>
       	
-  			<Chat data={data}/>
+  			<Chat data={data} timerHandler={this.state.timerHandler} />
   			
       	</div>
       	
