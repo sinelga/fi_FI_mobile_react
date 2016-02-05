@@ -10,6 +10,7 @@ import {Button,Thumbnail,Row,Col,Grid,Image,Alert,Label,Badge,Input } from 'reac
 var t;
 var data;
 var chatID
+var xhr
 //var phone
 
 class Chat extends React.Component {
@@ -32,7 +33,7 @@ class Chat extends React.Component {
 
 	  }
 	loadajax(url) {
-		$.ajax({
+		xhr = $.ajax({
 		      url: 'http://www.paljaat.fi:8000/chat/'+url,
 		      dataType: 'json',
 		      cache: false,
@@ -55,10 +56,8 @@ class Chat extends React.Component {
 		 
 		 var self = this;
 		 t =setInterval(function() {
-		 			 
-			console.log("timer",t)
-			console.log(self.state.answer)	
-			self.setState({count: self.state.count + 1});
+		console.log(self.state.answer)	
+		self.setState({count: self.state.count + 1});
 			
 		}, 3500); 
 		 		 
@@ -140,6 +139,14 @@ class Chat extends React.Component {
 				
 	}
 	
+	componentWillUnmount(){
+		
+		console.log("componentWillUnmount Chat",xhr)
+		xhr.abort()
+		this. timerOff()
+		
+	}
+		
 	 handleSubmit(e) {
 		 if (this.state.nextask.length > 0) {
 		 e.preventDefault();

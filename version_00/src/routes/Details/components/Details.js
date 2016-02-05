@@ -33,24 +33,24 @@ class Details extends React.Component {
 		
 	}
 	
-//	handleToggleDetailsChat(){
-//
-//		var dnode = ReactDOM.findDOMNode(this.refs.chat).style.display
-//		
-//		if (dnode === 'none') {
-//			
-//			this.setState({timerHandler: 'on'})
-//			ReactDOM.findDOMNode(this.refs.chat).style.display =''
-//			ReactDOM.findDOMNode(this.refs.details).style.display ='none'	
-//			
-//		} else {
-//			this.setState({timerHandler: 'off'})
-//			ReactDOM.findDOMNode(this.refs.chat).style.display ='none'
-//			ReactDOM.findDOMNode(this.refs.details).style.display =''			
-//			
-//		}
-//		
-//	}
+	handleToggleDetailsChat(){
+
+		var dnode = ReactDOM.findDOMNode(this.refs.chat).style.display
+		
+		if (dnode === 'none') {
+			
+			this.setState({timerHandler: 'on'})
+			ReactDOM.findDOMNode(this.refs.chat).style.display =''
+			ReactDOM.findDOMNode(this.refs.details).style.display ='none'	
+			
+		} else {
+			this.setState({timerHandler: 'off'})
+			ReactDOM.findDOMNode(this.refs.chat).style.display ='none'
+			ReactDOM.findDOMNode(this.refs.details).style.display =''			
+			
+		}
+		
+	}
 	
 	
 	handleReturn(){

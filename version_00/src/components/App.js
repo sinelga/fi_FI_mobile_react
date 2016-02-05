@@ -15,19 +15,17 @@ class App extends React.Component {
 	
 	componentWillUpdate(){
 		
-		console.log("componentWillUpdate App ")
+//		console.log("componentWillUpdate App ")
 //		global.OPERATORS_OBJS =this.state.data;
 	}
 	
 	componentDidMount(){
 		
-		console.log("mount App ")
-		
-//		this.loadajax()
+//		console.log("mount App ")
 				   
 	}
 	componentWillReceiveProps(){
-		console.log("App  receive props")
+//		console.log("App  receive props")
 		console.log(this.props)
 	}
 	
@@ -40,8 +38,7 @@ class App extends React.Component {
       <div>
       	          
       	{this.props.children || <ObjList />} 
-      
-  
+        
      </div>
     )
   }

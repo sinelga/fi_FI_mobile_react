@@ -29,8 +29,8 @@ webpackJsonp([0],{
 	  component: 'div',
 	  childRoutes: [{
 	    path: '/',
-	    component: __webpack_require__(218),
-	    childRoutes: [__webpack_require__(463)]
+	    component: __webpack_require__(217),
+	    childRoutes: [__webpack_require__(462)]
 	  }]
 	}; /*eslint-disable no-unused-vars */
 
@@ -44,7 +44,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 218:
+/***/ 217:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55,7 +55,7 @@ webpackJsonp([0],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ObjList = __webpack_require__(219);
+	var _ObjList = __webpack_require__(218);
 
 	var _ObjList2 = _interopRequireDefault(_ObjList);
 
@@ -89,21 +89,20 @@ webpackJsonp([0],{
 			key: 'componentWillUpdate',
 			value: function componentWillUpdate() {
 
-				console.log("componentWillUpdate App ");
+				//		console.log("componentWillUpdate App ")
 				//		global.OPERATORS_OBJS =this.state.data;
 			}
 		}, {
 			key: 'componentDidMount',
 			value: function componentDidMount() {
 
-				console.log("mount App ");
+				//		console.log("mount App ")
 
-				//		this.loadajax()
 			}
 		}, {
 			key: 'componentWillReceiveProps',
 			value: function componentWillReceiveProps() {
-				console.log("App  receive props");
+				//		console.log("App  receive props")
 				console.log(this.props);
 			}
 		}, {
@@ -125,7 +124,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 219:
+/***/ 218:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -136,13 +135,13 @@ webpackJsonp([0],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _jquery = __webpack_require__(220);
+	var _jquery = __webpack_require__(219);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
 	var _reactRouter = __webpack_require__(160);
 
-	var _reactBootstrap = __webpack_require__(221);
+	var _reactBootstrap = __webpack_require__(220);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -248,7 +247,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 463:
+/***/ 462:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -267,7 +266,7 @@ webpackJsonp([0],{
 
 			getComponents: function getComponents(location, cb) {
 					__webpack_require__.e/* nsure */(1, function (require) {
-							cb(null, __webpack_require__(464));
+							cb(null, __webpack_require__(463));
 							//		        cb(null,{
 							//		        	chat: require('./components/Chat'),
 							//		        	main: require('./components/Details'),

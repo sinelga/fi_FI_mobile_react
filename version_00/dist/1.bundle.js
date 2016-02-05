@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 464:
+/***/ 463:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11,11 +11,11 @@ webpackJsonp([1],{
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _jquery = __webpack_require__(220);
+	var _jquery = __webpack_require__(219);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _reactBootstrap = __webpack_require__(221);
+	var _reactBootstrap = __webpack_require__(220);
 
 	var _reactRouter = __webpack_require__(160);
 
@@ -23,7 +23,7 @@ webpackJsonp([1],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Chat = __webpack_require__(465);
+	var _Chat = __webpack_require__(464);
 
 	var _Chat2 = _interopRequireDefault(_Chat);
 
@@ -68,26 +68,23 @@ webpackJsonp([1],{
 					}.bind(this)
 				});
 			}
+		}, {
+			key: 'handleToggleDetailsChat',
+			value: function handleToggleDetailsChat() {
 
-			//	handleToggleDetailsChat(){
-			//
-			//		var dnode = ReactDOM.findDOMNode(this.refs.chat).style.display
-			//		
-			//		if (dnode === 'none') {
-			//			
-			//			this.setState({timerHandler: 'on'})
-			//			ReactDOM.findDOMNode(this.refs.chat).style.display =''
-			//			ReactDOM.findDOMNode(this.refs.details).style.display ='none'	
-			//			
-			//		} else {
-			//			this.setState({timerHandler: 'off'})
-			//			ReactDOM.findDOMNode(this.refs.chat).style.display ='none'
-			//			ReactDOM.findDOMNode(this.refs.details).style.display =''			
-			//			
-			//		}
-			//		
-			//	}
+				var dnode = _reactDom2.default.findDOMNode(this.refs.chat).style.display;
 
+				if (dnode === 'none') {
+
+					this.setState({ timerHandler: 'on' });
+					_reactDom2.default.findDOMNode(this.refs.chat).style.display = '';
+					_reactDom2.default.findDOMNode(this.refs.details).style.display = 'none';
+				} else {
+					this.setState({ timerHandler: 'off' });
+					_reactDom2.default.findDOMNode(this.refs.chat).style.display = 'none';
+					_reactDom2.default.findDOMNode(this.refs.details).style.display = '';
+				}
+			}
 		}, {
 			key: 'handleReturn',
 			value: function handleReturn() {
@@ -190,7 +187,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 465:
+/***/ 464:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -205,15 +202,15 @@ webpackJsonp([1],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _jquery = __webpack_require__(220);
+	var _jquery = __webpack_require__(219);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _nodeUuid = __webpack_require__(466);
+	var _nodeUuid = __webpack_require__(465);
 
 	var _nodeUuid2 = _interopRequireDefault(_nodeUuid);
 
-	var _reactBootstrap = __webpack_require__(221);
+	var _reactBootstrap = __webpack_require__(220);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -229,6 +226,7 @@ webpackJsonp([1],{
 	var t;
 	var data;
 	var chatID;
+	var xhr;
 	//var phone
 
 	var Chat = function (_React$Component) {
@@ -259,7 +257,7 @@ webpackJsonp([1],{
 		_createClass(Chat, [{
 			key: 'loadajax',
 			value: function loadajax(url) {
-				_jquery2.default.ajax({
+				xhr = _jquery2.default.ajax({
 					url: 'http://www.paljaat.fi:8000/chat/' + url,
 					dataType: 'json',
 					cache: false,
@@ -284,8 +282,6 @@ webpackJsonp([1],{
 
 				var self = this;
 				t = setInterval(function () {
-
-					console.log("timer", t);
 					console.log(self.state.answer);
 					self.setState({ count: self.state.count + 1 });
 				}, 3500);
@@ -361,6 +357,14 @@ webpackJsonp([1],{
 				this.setState({ ask: 'Hei ' + data.Name + '!' });
 				var elem = _reactDom2.default.findDOMNode(this.refs.answer);
 				elem.style.display = 'none';
+			}
+		}, {
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+
+				console.log("componentWillUnmount Chat", xhr);
+				xhr.abort();
+				this.timerOff();
 			}
 		}, {
 			key: 'handleSubmit',
@@ -465,7 +469,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 466:
+/***/ 465:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(Buffer) {//     uuid.js
@@ -526,7 +530,7 @@ webpackJsonp([1],{
 	    // Moderately fast, high quality
 	    if (true) {
 	      try {
-	        var _rb = __webpack_require__(471).randomBytes;
+	        var _rb = __webpack_require__(470).randomBytes;
 	        _nodeRNG = _rng = _rb && function() {return _rb(16);};
 	        _rng();
 	      } catch(e) {}
@@ -741,11 +745,11 @@ webpackJsonp([1],{
 	  }
 	})('undefined' !== typeof window ? window : null);
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(467).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(466).Buffer))
 
 /***/ },
 
-/***/ 467:
+/***/ 466:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/*!
@@ -758,9 +762,9 @@ webpackJsonp([1],{
 
 	'use strict'
 
-	var base64 = __webpack_require__(468)
-	var ieee754 = __webpack_require__(469)
-	var isArray = __webpack_require__(470)
+	var base64 = __webpack_require__(467)
+	var ieee754 = __webpack_require__(468)
+	var isArray = __webpack_require__(469)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -2297,11 +2301,11 @@ webpackJsonp([1],{
 	  return i
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(467).Buffer, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(466).Buffer, (function() { return this; }())))
 
 /***/ },
 
-/***/ 468:
+/***/ 467:
 /***/ function(module, exports, __webpack_require__) {
 
 	var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -2432,7 +2436,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 469:
+/***/ 468:
 /***/ function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -2523,7 +2527,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 470:
+/***/ 469:
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -2535,10 +2539,10 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 471:
+/***/ 470:
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var rng = __webpack_require__(472)
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var rng = __webpack_require__(471)
 
 	function error () {
 	  var m = [].slice.call(arguments).join(' ')
@@ -2549,9 +2553,9 @@ webpackJsonp([1],{
 	    ].join('\n'))
 	}
 
-	exports.createHash = __webpack_require__(474)
+	exports.createHash = __webpack_require__(473)
 
-	exports.createHmac = __webpack_require__(486)
+	exports.createHmac = __webpack_require__(485)
 
 	exports.randomBytes = function(size, callback) {
 	  if (callback && callback.call) {
@@ -2572,7 +2576,7 @@ webpackJsonp([1],{
 	  return ['sha1', 'sha256', 'sha512', 'md5', 'rmd160']
 	}
 
-	var p = __webpack_require__(487)(exports)
+	var p = __webpack_require__(486)(exports)
 	exports.pbkdf2 = p.pbkdf2
 	exports.pbkdf2Sync = p.pbkdf2Sync
 
@@ -2592,17 +2596,17 @@ webpackJsonp([1],{
 	  }
 	})
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(467).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(466).Buffer))
 
 /***/ },
 
-/***/ 472:
+/***/ 471:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, Buffer) {(function() {
 	  var g = ('undefined' === typeof window ? global : window) || {}
 	  _crypto = (
-	    g.crypto || g.msCrypto || __webpack_require__(473)
+	    g.crypto || g.msCrypto || __webpack_require__(472)
 	  )
 	  module.exports = function(size) {
 	    // Modern Browsers
@@ -2626,24 +2630,24 @@ webpackJsonp([1],{
 	  }
 	}())
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(467).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(466).Buffer))
 
 /***/ },
 
-/***/ 473:
+/***/ 472:
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
 
-/***/ 474:
+/***/ 473:
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(475)
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(474)
 
-	var md5 = toConstructor(__webpack_require__(483))
-	var rmd160 = toConstructor(__webpack_require__(485))
+	var md5 = toConstructor(__webpack_require__(482))
+	var rmd160 = toConstructor(__webpack_require__(484))
 
 	function toConstructor (fn) {
 	  return function () {
@@ -2671,11 +2675,11 @@ webpackJsonp([1],{
 	  return createHash(alg)
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(467).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(466).Buffer))
 
 /***/ },
 
-/***/ 475:
+/***/ 474:
 /***/ function(module, exports, __webpack_require__) {
 
 	var exports = module.exports = function (alg) {
@@ -2684,17 +2688,17 @@ webpackJsonp([1],{
 	  return new Alg()
 	}
 
-	var Buffer = __webpack_require__(467).Buffer
-	var Hash   = __webpack_require__(476)(Buffer)
+	var Buffer = __webpack_require__(466).Buffer
+	var Hash   = __webpack_require__(475)(Buffer)
 
-	exports.sha1 = __webpack_require__(477)(Buffer, Hash)
-	exports.sha256 = __webpack_require__(481)(Buffer, Hash)
-	exports.sha512 = __webpack_require__(482)(Buffer, Hash)
+	exports.sha1 = __webpack_require__(476)(Buffer, Hash)
+	exports.sha256 = __webpack_require__(480)(Buffer, Hash)
+	exports.sha512 = __webpack_require__(481)(Buffer, Hash)
 
 
 /***/ },
 
-/***/ 476:
+/***/ 475:
 /***/ function(module, exports) {
 
 	module.exports = function (Buffer) {
@@ -2778,7 +2782,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 477:
+/***/ 476:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -2790,7 +2794,7 @@ webpackJsonp([1],{
 	 * See http://pajhome.org.uk/crypt/md5 for details.
 	 */
 
-	var inherits = __webpack_require__(478).inherits
+	var inherits = __webpack_require__(477).inherits
 
 	module.exports = function (Buffer, Hash) {
 
@@ -2923,7 +2927,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 478:
+/***/ 477:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -3451,7 +3455,7 @@ webpackJsonp([1],{
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(479);
+	exports.isBuffer = __webpack_require__(478);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -3495,7 +3499,7 @@ webpackJsonp([1],{
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(480);
+	exports.inherits = __webpack_require__(479);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -3517,7 +3521,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 479:
+/***/ 478:
 /***/ function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -3529,7 +3533,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 480:
+/***/ 479:
 /***/ function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -3559,7 +3563,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 481:
+/***/ 480:
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -3571,7 +3575,7 @@ webpackJsonp([1],{
 	 *
 	 */
 
-	var inherits = __webpack_require__(478).inherits
+	var inherits = __webpack_require__(477).inherits
 
 	module.exports = function (Buffer, Hash) {
 
@@ -3713,10 +3717,10 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 482:
+/***/ 481:
 /***/ function(module, exports, __webpack_require__) {
 
-	var inherits = __webpack_require__(478).inherits
+	var inherits = __webpack_require__(477).inherits
 
 	module.exports = function (Buffer, Hash) {
 	  var K = [
@@ -3964,7 +3968,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 483:
+/***/ 482:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -3976,7 +3980,7 @@ webpackJsonp([1],{
 	 * See http://pajhome.org.uk/crypt/md5 for more info.
 	 */
 
-	var helpers = __webpack_require__(484);
+	var helpers = __webpack_require__(483);
 
 	/*
 	 * Calculate the MD5 of an array of little-endian words, and a bit length
@@ -4126,7 +4130,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 484:
+/***/ 483:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {var intSize = 4;
@@ -4164,11 +4168,11 @@ webpackJsonp([1],{
 
 	module.exports = { hash: hash };
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(467).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(466).Buffer))
 
 /***/ },
 
-/***/ 485:
+/***/ 484:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {
@@ -4377,14 +4381,14 @@ webpackJsonp([1],{
 
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(467).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(466).Buffer))
 
 /***/ },
 
-/***/ 486:
+/***/ 485:
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(474)
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(473)
 
 	var zeroBuffer = new Buffer(128)
 	zeroBuffer.fill(0)
@@ -4428,14 +4432,14 @@ webpackJsonp([1],{
 	}
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(467).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(466).Buffer))
 
 /***/ },
 
-/***/ 487:
+/***/ 486:
 /***/ function(module, exports, __webpack_require__) {
 
-	var pbkdf2Export = __webpack_require__(488)
+	var pbkdf2Export = __webpack_require__(487)
 
 	module.exports = function (crypto, exports) {
 	  exports = exports || {}
@@ -4451,7 +4455,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 488:
+/***/ 487:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {module.exports = function(crypto) {
@@ -4539,7 +4543,7 @@ webpackJsonp([1],{
 	  }
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(467).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(466).Buffer))
 
 /***/ }
 
