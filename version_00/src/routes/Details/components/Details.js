@@ -1,5 +1,5 @@
 import React from 'react'
-import $ from 'jquery'
+//import $ from 'jquery'
 //import { Link } from 'react-router'
 import {Button,Thumbnail,Grid,Image  } from 'react-bootstrap'
 import { browserHistory } from 'react-router'
@@ -19,17 +19,43 @@ class Details extends React.Component {
 	  }
 	
 	loadajax(id) {
-		$.ajax({
-		      url: 'http://www.paljaat.fi:8000/api/'+id,
-		      dataType: 'json',
-		      cache: false,
-		      success: function(data) {
-		        this.setState({data: data});
-		      }.bind(this),
-		      error: function(xhr, status, err) {
-		        console.error(this.props.url, status, err.toString());
-		      }.bind(this)
-		    });
+//		$.ajax({
+//		      url: 'http://www.paljaat.fi:8000/api/'+id,
+//		      dataType: 'json',
+//		      cache: false,
+//		      success: function(data) {
+//		        this.setState({data: data});
+//		      }.bind(this),
+//		      error: function(xhr, status, err) {
+//		        console.error(this.props.url, status, err.toString());
+//		      }.bind(this)
+//		    });
+		console.log(location.hostname)
+		var hostname = location.hostname
+		
+		if (hostname =='127.0.0.1') {
+			hostname='www.test.com'
+		}
+		var request = new XMLHttpRequest();
+		request.open('GET', 'http://'+hostname+':8000/api/'+id, true);
+
+		request.onload = function() {
+		  if (request.status >= 200 && request.status < 400) {
+		    // Success!			  
+		    var data = JSON.parse(request.responseText);
+		    this.setState({data: data});
+		    
+		  } else {
+		    // We reached our target server, but it returned an error
+
+		  }
+		}.bind(this);
+
+		request.onerror = function() {
+		  // There was a connection error of some sort
+		};
+
+		request.send();
 		
 	}
 	
@@ -91,7 +117,7 @@ class Details extends React.Component {
 				
   render() {
 	  
-	  var id =this.props.params.id 
+//	  var id =this.props.params.id 
 	  var data = this.state.data
 	  var imglink = "http://www.paljaat.fi:8000/img/"+data.ImgId+"/"+data.Img_file_name+"/200/250"
 	  

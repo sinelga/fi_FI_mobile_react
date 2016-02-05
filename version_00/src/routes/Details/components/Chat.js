@@ -1,16 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import $ from 'jquery'
-//import Timer from 'react-timer'
+//import $ from 'jquery'
 import Uuid from 'node-uuid'
-//import { Link } from 'react-router'
-import {Button,Thumbnail,Row,Col,Grid,Image,Alert,Label,Badge,Input } from 'react-bootstrap'
+import {Button,Image,Alert,Badge,Input } from 'react-bootstrap'
 
 
 var t;
 var data;
 var chatID
-var xhr
+var request
 //var phone
 
 class Chat extends React.Component {
@@ -33,17 +31,39 @@ class Chat extends React.Component {
 
 	  }
 	loadajax(url) {
-		xhr = $.ajax({
-		      url: 'http://www.paljaat.fi:8000/chat/'+url,
-		      dataType: 'json',
-		      cache: false,
-		      success: function(data) {
-		        this.setState({answer: data.answer});
-		      }.bind(this),
-		      error: function(xhr, status, err) {
-		        console.error(this.props.url, status, err.toString());
-		      }.bind(this)
-		    });		
+//		xhr = $.ajax({
+//		      url: 'http://www.paljaat.fi:8000/chat/'+url,
+//		      dataType: 'json',
+//		      cache: false,
+//		      success: function(data) {
+//		        this.setState({answer: data.answer});
+//		      }.bind(this),
+//		      error: function(xhr, status, err) {
+//		        console.error(this.props.url, status, err.toString());
+//		      }.bind(this)
+//		    });
+		
+		request = new XMLHttpRequest();
+		request.open('GET', 'http://www.paljaat.fi:8000/chat/'+url, true);
+
+		request.onload = function() {
+		  if (request.status >= 200 && request.status < 400) {
+		    // Success!			  
+		    var data = JSON.parse(request.responseText);
+//		    this.setState({data: data});
+		    this.setState({answer: data.answer});
+		    
+		  } else {
+		    // We reached our target server, but it returned an error
+
+		  }
+		}.bind(this);
+
+		request.onerror = function() {
+		  // There was a connection error of some sort
+		};
+
+		request.send();
 	}
 
 	 timerOff(){
@@ -141,8 +161,8 @@ class Chat extends React.Component {
 	
 	componentWillUnmount(){
 		
-		console.log("componentWillUnmount Chat",xhr)
-		xhr.abort()
+		console.log("componentWillUnmount Chat",request)
+		request.abort()
 		this. timerOff()
 		
 	}
