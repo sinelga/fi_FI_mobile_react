@@ -47,10 +47,8 @@ webpackJsonp([1],{
 			_this.state = {
 				data: [],
 				timerHandler: ''
-				//	    	currentComponent: React.Component
 
 			};
-			//	    this.handleStartChat=this.handleStartChat.bind(this)
 			_this.handleToggleDetailsChat = _this.handleToggleDetailsChat.bind(_this);
 			return _this;
 		}
@@ -70,25 +68,26 @@ webpackJsonp([1],{
 					}.bind(this)
 				});
 			}
-		}, {
-			key: 'handleToggleDetailsChat',
-			value: function handleToggleDetailsChat() {
 
-				var dnode = _reactDom2.default.findDOMNode(this.refs.chat).style.display;
+			//	handleToggleDetailsChat(){
+			//
+			//		var dnode = ReactDOM.findDOMNode(this.refs.chat).style.display
+			//		
+			//		if (dnode === 'none') {
+			//			
+			//			this.setState({timerHandler: 'on'})
+			//			ReactDOM.findDOMNode(this.refs.chat).style.display =''
+			//			ReactDOM.findDOMNode(this.refs.details).style.display ='none'	
+			//			
+			//		} else {
+			//			this.setState({timerHandler: 'off'})
+			//			ReactDOM.findDOMNode(this.refs.chat).style.display ='none'
+			//			ReactDOM.findDOMNode(this.refs.details).style.display =''			
+			//			
+			//		}
+			//		
+			//	}
 
-				//		this.setState({currentComponent: "Chat"});
-
-				if (dnode === 'none') {
-
-					this.setState({ timerHandler: 'on' });
-					_reactDom2.default.findDOMNode(this.refs.chat).style.display = '';
-					_reactDom2.default.findDOMNode(this.refs.details).style.display = 'none';
-				} else {
-					this.setState({ timerHandler: 'off' });
-					_reactDom2.default.findDOMNode(this.refs.chat).style.display = 'none';
-					_reactDom2.default.findDOMNode(this.refs.details).style.display = '';
-				}
-			}
 		}, {
 			key: 'handleReturn',
 			value: function handleReturn() {
@@ -130,7 +129,6 @@ webpackJsonp([1],{
 			value: function render() {
 
 				var id = this.props.params.id;
-
 				var data = this.state.data;
 				var imglink = "http://www.paljaat.fi:8000/img/" + data.ImgId + "/" + data.Img_file_name + "/200/250";
 
@@ -138,17 +136,17 @@ webpackJsonp([1],{
 					'div',
 					null,
 					_react2.default.createElement(
+						'button',
+						{ onClick: this.handleReturn, type: 'button', className: 'close', 'data-dismiss': 'alert', 'aria-label': 'Close' },
+						_react2.default.createElement(
+							'span',
+							{ 'aria-hidden': 'true', className: 'bigclose' },
+							'×'
+						)
+					),
+					_react2.default.createElement(
 						'div',
 						{ ref: 'details' },
-						_react2.default.createElement(
-							'button',
-							{ onClick: this.handleReturn, type: 'button', className: 'close', 'data-dismiss': 'alert', 'aria-label': 'Close' },
-							_react2.default.createElement(
-								'span',
-								{ 'aria-hidden': 'true', className: 'bigclose' },
-								'×'
-							)
-						),
 						_react2.default.createElement(
 							'a',
 							{ className: 'mbigphone', href: 'tel:' + data.Phone },
@@ -179,15 +177,6 @@ webpackJsonp([1],{
 					_react2.default.createElement(
 						'div',
 						{ ref: 'chat' },
-						_react2.default.createElement(
-							'button',
-							{ onClick: this.handleToggleDetailsChat, type: 'button', className: 'close', 'data-dismiss': 'alert', 'aria-label': 'Close' },
-							_react2.default.createElement(
-								'span',
-								{ 'aria-hidden': 'true', className: 'bigclose' },
-								'×'
-							)
-						),
 						_react2.default.createElement(_Chat2.default, { data: data, timerHandler: this.state.timerHandler })
 					)
 				);
@@ -336,14 +325,15 @@ webpackJsonp([1],{
 		}, {
 			key: 'componentWillUpdate',
 			value: function componentWillUpdate(prevProps) {
-				//			console.log("Chat componentWillUpdate")
+				console.log("Chat componentWillUpdate");
 
 				if (this.state.count > 7) {
 
-					this.timerOff();
-					_reactDom2.default.findDOMNode(this.refs.label_typing).style.visibility = '';
+					_reactDom2.default.findDOMNode(this.refs.label_typing).style.visibility = 'hidden';
 					_reactDom2.default.findDOMNode(this.refs.answer).style.display = '';
-				} else {
+					this.timerOff();
+				} else if (this.state.count !== 0) {
+
 					this.toggle();
 				}
 			}

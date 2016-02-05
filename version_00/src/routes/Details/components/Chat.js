@@ -99,15 +99,17 @@ class Chat extends React.Component {
 		}
 		
 		componentWillUpdate(prevProps) {
-//			console.log("Chat componentWillUpdate")
+			console.log("Chat componentWillUpdate")
 			
 			 if (this.state.count > 7 ){
 				 
+				 ReactDOM.findDOMNode(this.refs.label_typing).style.visibility ='hidden';				
+				 ReactDOM.findDOMNode(this.refs.answer).style.display =''
 				 this.timerOff()
-				 ReactDOM.findDOMNode(this.refs.label_typing).style.visibility ='';				
-				 ReactDOM.findDOMNode(this.refs.answer).style.display =''	 
+	 
 				 
-			 } else {
+			 } else if (this.state.count !== 0 ) {
+				 
 				 this.toggle() 
 			 }
 			
@@ -194,7 +196,7 @@ class Chat extends React.Component {
 				<div ref='answer'> 
 					<Alert bsStyle="danger">{answer}</Alert>
 					<form onSubmit={this.handleSubmit}>
-					<Input type="text" label="Name" placeholder="Kysyä jotain!" value={this.state.nextask}  onChange={this.handleNextAskChange}/>
+					<Input type="text" label="Name" placeholder="Kysyä jotain!" value={this.state.nextask} onChange={this.handleNextAskChange}/>
 				</form>
 				<Button bsStyle="primary" onClick={this.handleSubmit}>Jatkaa</Button>	
 				</div>

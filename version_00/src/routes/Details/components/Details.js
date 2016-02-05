@@ -13,10 +13,8 @@ class Details extends React.Component {
 	    this.state = {
 	    	data: [],
 	    	timerHandler: ''
-//	    	currentComponent: React.Component
 	    	   	
 	    }
-//	    this.handleStartChat=this.handleStartChat.bind(this)
 	    this.handleToggleDetailsChat=this.handleToggleDetailsChat.bind(this)
 	  }
 	
@@ -35,26 +33,24 @@ class Details extends React.Component {
 		
 	}
 	
-	handleToggleDetailsChat(){
-
-		var dnode = ReactDOM.findDOMNode(this.refs.chat).style.display
-		
-//		this.setState({currentComponent: "Chat"});
-		
-		if (dnode === 'none') {
-			
-			this.setState({timerHandler: 'on'})
-			ReactDOM.findDOMNode(this.refs.chat).style.display =''
-			ReactDOM.findDOMNode(this.refs.details).style.display ='none'	
-			
-		} else {
-			this.setState({timerHandler: 'off'})
-			ReactDOM.findDOMNode(this.refs.chat).style.display ='none'
-			ReactDOM.findDOMNode(this.refs.details).style.display =''			
-			
-		}
-		
-	}
+//	handleToggleDetailsChat(){
+//
+//		var dnode = ReactDOM.findDOMNode(this.refs.chat).style.display
+//		
+//		if (dnode === 'none') {
+//			
+//			this.setState({timerHandler: 'on'})
+//			ReactDOM.findDOMNode(this.refs.chat).style.display =''
+//			ReactDOM.findDOMNode(this.refs.details).style.display ='none'	
+//			
+//		} else {
+//			this.setState({timerHandler: 'off'})
+//			ReactDOM.findDOMNode(this.refs.chat).style.display ='none'
+//			ReactDOM.findDOMNode(this.refs.details).style.display =''			
+//			
+//		}
+//		
+//	}
 	
 	
 	handleReturn(){
@@ -96,26 +92,23 @@ class Details extends React.Component {
   render() {
 	  
 	  var id =this.props.params.id 
-
 	  var data = this.state.data
 	  var imglink = "http://www.paljaat.fi:8000/img/"+data.ImgId+"/"+data.Img_file_name+"/200/250"
 	  
     return (
       <div>
+		<button onClick={this.handleReturn} type="button" className="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true" className="bigclose">&times;</span>
+		</button>
+		
       	<div ref='details'>
-      		<button onClick={this.handleReturn} type="button" className="close" data-dismiss="alert" aria-label="Close">
-      			<span aria-hidden="true" className="bigclose">&times;</span>
-      		</button>
       
       		<a className="mbigphone" href={`tel:${data.Phone}`}><span className="glyphicon glyphicon-earphone" aria-hidden="true"></span> {data.Phone}</a>
       		<Grid><Image src={imglink} thumbnail></Image><p>{data.Name} {this.state.data.Age}v {data.City}</p><Button onClick={this.handleToggleDetailsChat} bsStyle="primary" bsSize="large" active>Chatti</Button></Grid>
       	</div>
       	
       	<div ref='chat'>
-  			<button onClick={this.handleToggleDetailsChat} type="button" className="close" data-dismiss="alert" aria-label="Close">
-  				<span aria-hidden="true" className="bigclose">&times;</span>
-  			</button>
-      	
+       	
   			<Chat data={data} timerHandler={this.state.timerHandler} />
   			
       	</div>
