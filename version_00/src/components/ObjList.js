@@ -15,19 +15,7 @@ class ObjList extends React.Component {
 	}
 		
 	loadajax() {
-		
-	
-//		$.ajax({
-//		      url: 'http://www.paljaat.fi:8000/api',
-//		      dataType: 'json',
-//		      cache: false,
-//		      success: function(data) {
-//		        this.setState({data: data});
-//		      }.bind(this),
-//		      error: function(xhr, status, err) {
-//		        console.error(this.props.url, status, err.toString());
-//		      }.bind(this)
-//		    });
+
 		console.log(location.hostname)
 		var hostname = location.hostname
 		
@@ -77,8 +65,8 @@ class ObjList extends React.Component {
 			 var permlink = "/" +rentobjs[i].Id+"/"+arrayOfStrings[0]+'_'+arrayOfStrings[1]+'.html'
 			 
 //			 images.push(<li className="media" key={`${i}`}><Link  to={`/${rentobjs[i].Id}/${permlink}`}><div className="media-left"><img src={`http://www.paljaat.fi:8000/img/${rentobjs[i].ImgId}/${rentobjs[i].Img_file_name}/100/150`} /></div></Link><div className="media-body">lssls</div></li>); 
-//			 images.push(<Link key={`${i}`} to={permlink}><Grid fluid><Image className="boxImageSmall" src={`http://www.paljaat.fi:8000/img/${rentobjs[i].ImgId}/${rentobjs[i].Img_file_name}/100/150`} thumbnail><p className='phone'>{rentobjs[i].Phone}</p><p>{rentobjs[i].Name}</p><p>{rentobjs[i].City}</p></Image></Grid></Link>)
-			 images.push(<Link key={`${i}`} to={permlink}><Grid fluid><img className="boxImageSmall" src={`http://www.paljaat.fi:8000/img/${rentobjs[i].ImgId}/${rentobjs[i].Img_file_name}/100/150`} ><p className='phone'>{rentobjs[i].Phone}</p><p>{rentobjs[i].Name}</p><p>{rentobjs[i].City}</p></img></Grid></Link>) 	 
+			 images.push(<Link key={`${i}`} to={permlink}><Grid fluid><Image className="boxImageSmall" src={`http://www.paljaat.fi:8000/img/${rentobjs[i].ImgId}/${rentobjs[i].Img_file_name}/100/150`} thumbnail><p className='phone'>{rentobjs[i].Phone}</p><p>{rentobjs[i].Name}</p><p>{rentobjs[i].City}</p></Image></Grid></Link>)
+//			 images.push(<Link key={`${i}`} to={permlink}><Grid fluid><img className="boxImageSmall" src={`http://www.paljaat.fi:8000/img/${rentobjs[i].ImgId}/${rentobjs[i].Img_file_name}/100/150`} ><p className='phone'>{rentobjs[i].Phone}</p><p>{rentobjs[i].Name}</p><p>{rentobjs[i].City}</p></img></Grid></Link>) 	 
 		 }
 		 		 
 		 return (
