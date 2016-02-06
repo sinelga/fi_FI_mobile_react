@@ -6,7 +6,7 @@ module.exports = {
 			vendor: ["react","react-router","react-bootstrap","node-uuid"],
 		  },
    output: {
-     path: __dirname + '/dist',
+     path: __dirname + '/dist/js',
      filename: 'bundle.js',
      publicPath: '/'
    },
