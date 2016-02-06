@@ -162,7 +162,7 @@ class Chat extends React.Component {
 	componentWillUnmount(){
 		
 		console.log("componentWillUnmount Chat",request)
-		request.abort()
+//		request.abort()
 		this. timerOff()
 		
 	}
