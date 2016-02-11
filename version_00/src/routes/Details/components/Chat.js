@@ -31,17 +31,6 @@ class Chat extends React.Component {
 
 	  }
 	loadajax(url) {
-//		xhr = $.ajax({
-//		      url: 'http://www.paljaat.fi:8000/chat/'+url,
-//		      dataType: 'json',
-//		      cache: false,
-//		      success: function(data) {
-//		        this.setState({answer: data.answer});
-//		      }.bind(this),
-//		      error: function(xhr, status, err) {
-//		        console.error(this.props.url, status, err.toString());
-//		      }.bind(this)
-//		    });
 		
 		request = new XMLHttpRequest();
 		request.open('GET', 'http://www.paljaat.fi:8000/chat/'+url, true);
@@ -76,7 +65,7 @@ class Chat extends React.Component {
 		 
 		 var self = this;
 		 t =setInterval(function() {
-		console.log(self.state.answer)	
+		
 		self.setState({count: self.state.count + 1});
 			
 		}, 3500); 
@@ -96,7 +85,7 @@ class Chat extends React.Component {
 		}
 		  
 		componentWillReceiveProps(nextProps){
-			console.log("Chat componentWillReceiveProps",nextProps)
+			
 						
 			data = nextProps.data
 			this.setState({ask:'Hei '+data.Name+'!'})
@@ -105,12 +94,12 @@ class Chat extends React.Component {
 				ReactDOM.findDOMNode(this.refs.answer).style.display ='none'
 				chatID =Uuid.v4()
 				let url =chatID+'/'+data.Phone+'/'+encodeURIComponent(this.state.ask)
-				console.log(url)
+				
 				this.loadajax(encodeURIComponent(url))				
 				this.timerOn()
 				
 			} else {
-				console.log("STOP timeR")
+				
 				this.timerOff()
 
 			}
@@ -118,8 +107,7 @@ class Chat extends React.Component {
 		}
 		
 		componentWillUpdate(prevProps) {
-			console.log("Chat componentWillUpdate")
-			
+						
 			 if (this.state.count > 7 ){
 				 
 				 ReactDOM.findDOMNode(this.refs.label_typing).style.visibility ='hidden';				
@@ -142,7 +130,7 @@ class Chat extends React.Component {
 	 } 
 	
 	componentWillMount(){
-		console.log("willmount Chat")
+		
 		this.setState({nextask: ''});
 		this.setState({ask: ''});
 //		ReactDOM.findDOMNode(this.refs.answer).style.display =''
@@ -151,7 +139,7 @@ class Chat extends React.Component {
 	}	
 		
 	componentDidMount(){
-		console.log("didmount Chat")
+		
 		data = this.props.data
 		this.setState({ask:'Hei '+data.Name+'!'})
 		var elem = ReactDOM.findDOMNode(this.refs.answer);
@@ -161,8 +149,6 @@ class Chat extends React.Component {
 	
 	componentWillUnmount(){
 		
-		console.log("componentWillUnmount Chat",request)
-//		request.abort()
 		this. timerOff()
 		
 	}
@@ -170,13 +156,13 @@ class Chat extends React.Component {
 	 handleSubmit(e) {
 		 if (this.state.nextask.length > 0) {
 		 e.preventDefault();
-		 console.log(this.state.nextask)
+		
 		 this.state.ask = this.state.nextask.trim()
 		 this.state.nextask =''
 		 ReactDOM.findDOMNode(this.refs.answer).style.display ='none'
 		 this.timerOn()
 		 let url =chatID+'/'+data.Phone+'/'+encodeURIComponent(this.state.ask)
-		 console.log(url)
+		 
 		 this.loadajax(encodeURIComponent(url))
 		 }
 	 }
@@ -215,21 +201,18 @@ class Chat extends React.Component {
 				<p><a className="mbigphone" href={`tel:${data.Phone}`}><span className="glyphicon glyphicon-earphone" aria-hidden="true"></span>{data.Phone}</a></p>
 				
 				Chatti: {data.Name} {data.Age}v 
-				<Badge ref='label_typing' pullRight>{status}</Badge>
-			
-				<p></p>						
-			    			   
+				<Badge ref='label_typing' pullRight>{status}</Badge>			
+				<p></p>									    			   
 				<Alert>{ask}</Alert> 
 				<div ref='answer'> 
 					<Alert bsStyle="danger">{answer}</Alert>
 					<form onSubmit={this.handleSubmit}>
-					<Input type="text" label="Name" placeholder="Kysyä jotain!" value={this.state.nextask} onChange={this.handleNextAskChange}/>
+					<Input type="text" placeholder="Kysyä jotain!" value={this.state.nextask} onChange={this.handleNextAskChange}/>
 				</form>
 				<Button bsStyle="primary" onClick={this.handleSubmit}>Jatkaa</Button>	
 				</div>
 			</div>
-		 
-		 
+		 		 
 		 )
 	 }
 	 	 
