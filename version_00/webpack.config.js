@@ -6,8 +6,8 @@ module.exports = {
 			vendor: ["react","react-router","react-bootstrap","node-uuid"],
 		  },
    output: {
-     path: __dirname + '/dist/js',
-     filename: 'bundle.js',
+     path: __dirname + '/dist',
+     filename: 'mobilebundle.js',
      publicPath: '/'
    },
    module: {
@@ -17,6 +17,6 @@ module.exports = {
    },
    
    plugins: [
-             new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js")
+             new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.mobilebundle.js")
            ]
 };

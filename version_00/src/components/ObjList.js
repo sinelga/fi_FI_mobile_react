@@ -16,7 +16,6 @@ class ObjList extends React.Component {
 		
 	loadajax() {
 
-		console.log(location.hostname)
 		var hostname = location.hostname
 		
 		if (hostname =='127.0.0.1') {
@@ -55,19 +54,21 @@ class ObjList extends React.Component {
 	 render() {
 
 		 var rentobjs = this.state.data;
-//		 global.OPERATORS_OBJS =this.state.data;
 		 var images = [];
+		 let hostname = location.hostname
+		if (hostname =='127.0.0.1') {
+				hostname='www.test.com'
+		}
 		 
 		 for  (var i = 0; i <  rentobjs.length; i++) {
-			
+						 
 			 var space = ' ';
 			 var arrayOfStrings = rentobjs[i].Moto.split(space);
 			 var permlink = "/" +rentobjs[i].Id+"/"+arrayOfStrings[0]+'_'+arrayOfStrings[1]+'.html'
-			 
-//			 images.push(<li className="media" key={`${i}`}><Link  to={`/${rentobjs[i].Id}/${permlink}`}><div className="media-left"><img src={`http://www.paljaat.fi:8000/img/${rentobjs[i].ImgId}/${rentobjs[i].Img_file_name}/100/150`} /></div></Link><div className="media-body">lssls</div></li>); 
-			 images.push(<Link key={`${i}`} to={permlink}><Grid fluid><Image className="boxImageSmall" src={`http://www.paljaat.fi:8000/img/${rentobjs[i].ImgId}/${rentobjs[i].Img_file_name}/100/150`} thumbnail><p className='phone'>{rentobjs[i].Phone}</p><p>{rentobjs[i].Name}</p><p>{rentobjs[i].City}</p></Image></Grid></Link>)
-//			 images.push(<Link key={`${i}`} to={permlink}><Grid fluid><img className="boxImageSmall" src={`http://www.paljaat.fi:8000/img/${rentobjs[i].ImgId}/${rentobjs[i].Img_file_name}/100/150`} ><p className='phone'>{rentobjs[i].Phone}</p><p>{rentobjs[i].Name}</p><p>{rentobjs[i].City}</p></img></Grid></Link>) 	 
-		 }
+			 var imagelink = "http://www.paljaat.fi:8000/img/"+rentobjs[i].ImgId+"/"+rentobjs[i].Img_file_name+"/100/150"
+//			 images.push(<Link key={`${i}`} to={permlink}><Grid fluid><Image className="boxImageSmall" src={`http://www.paljaat.fi:8000/img/${rentobjs[i].ImgId}/${rentobjs[i].Img_file_name}/100/150`} thumbnail><p className='phone'>{rentobjs[i].Phone}</p><p>{rentobjs[i].Name}</p><p>{rentobjs[i].City}</p></Image></Grid></Link>)
+			 images.push(<Link key={`${i}`} to={permlink}><Grid fluid><Image className="boxImageSmall" src={imagelink}  thumbnail><p className='phone'>{rentobjs[i].Phone}</p><p>{rentobjs[i].Name}</p><p>{rentobjs[i].City}</p></Image></Grid></Link>)
+			 }
 		 		 
 		 return (
 		    <div>
